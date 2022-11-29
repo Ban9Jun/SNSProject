@@ -16,31 +16,31 @@ class PostListActivity : AppCompatActivity() {
         bnv_main.run {
             setOnNavigationItemSelectedListener {
                 when (it.itemId) {
-                    R.id.first -> {
+                    R.id.home -> {
                         // 다른 프래그먼트 화면으로 이동하는 기능
                         val homeFragment = HomeFragment()
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, homeFragment).commit()
                     }
-                    R.id.second -> {
-                        val boardFragment = PostFragment()
+                    R.id.user -> {
+                        val profilFragment = ProfilFragment()
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, boardFragment).commit()
+                            .replace(R.id.fl_container, profilFragment).commit()
                     }
-                    R.id.third -> {
-                        val settingFragment = ProfilFragment()
+                    R.id.friend-> {
+                        val friendFragment = FriendFragment()
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, settingFragment).commit()
+                            .replace(R.id.fl_container, friendFragment).commit()
                     }
-                    R.id.forth -> {
-                        val settingFragment = ProfilFragment()
+                    R.id.post-> {
+                        val postFragment = PostFragment()
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, settingFragment).commit()
+                            .replace(R.id.fl_container, postFragment).commit()
                     }
                 }
                 true
             }
-            selectedItemId = R.id.first
+            selectedItemId = R.id.home
         }
     }
 }
