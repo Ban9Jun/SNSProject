@@ -1,4 +1,4 @@
-package com.example.snsproject
+package com.example.snsproject.navigation
 
 import android.content.Intent
 import android.net.Uri

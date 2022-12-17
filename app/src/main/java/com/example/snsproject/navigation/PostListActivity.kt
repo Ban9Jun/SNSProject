@@ -1,8 +1,9 @@
-package com.example.snsproject
+package com.example.snsproject.navigation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import androidx.core.app.ActivityCompat
+import com.example.snsproject.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PostListActivity : AppCompatActivity() {
@@ -29,12 +30,12 @@ class PostListActivity : AppCompatActivity() {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, profilFragment).commit()
                     }
-                    R.id.friend-> {
+                    R.id.friend -> {
                         val friendFragment = FriendFragment()
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, friendFragment).commit()
                     }
-                    R.id.post-> {
+                    R.id.post -> {
                         val postFragment = PostFragment()
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, postFragment).commit()
@@ -44,5 +45,7 @@ class PostListActivity : AppCompatActivity() {
             }
             selectedItemId = R.id.home
         }
+
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
     }
 }
