@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.snsproject.navigation.PostListActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
     private var firebaseAuth : FirebaseAuth? = null
@@ -37,6 +38,19 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        moveMainPage(firebaseAuth?.currentUser)
+    }
+
+    fun moveMainPage(user:FirebaseUser?){
+        if(user != null){
+            intent = Intent(this, PostListActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
     //로그인 기능
     fun signinEmail() {
         firebaseAuth?.signInWithEmailAndPassword(email.text.toString(),password.text.toString())
@@ -44,8 +58,7 @@ class LoginActivity : AppCompatActivity() {
                     task ->
                 if(task.isSuccessful) {
                     // Login, 아이디와 패스워드가 맞았을 때
-                    intent = Intent(this, PostListActivity::class.java)
-                    startActivity(intent)
+                    moveMainPage(task.result?.user)
                 } else {
                     // Show the error message, 아이디와 패스워드가 틀렸을 때
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()

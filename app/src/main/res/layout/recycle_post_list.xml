@@ -32,6 +32,14 @@
         android:gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/like"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/comment"/>
     </LinearLayout>
     <TextView
         android:id="@+id/detailViewItem_favoriteCounter_textView"

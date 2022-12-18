@@ -1,10 +1,14 @@
 package com.example.snsproject.navigation
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.snsproject.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class PostListActivity : AppCompatActivity() {
 
@@ -18,6 +22,7 @@ class PostListActivity : AppCompatActivity() {
         // navi_menu.xml 에서 설정했던 각 아이템들의 id를 통해 알맞은 프래그먼트로 변경하게 한다.
         bnv_main.run {
             setOnNavigationItemSelectedListener {
+                setToolbarDefault()
                 when (it.itemId) {
                     R.id.home -> {
                         // 다른 프래그먼트 화면으로 이동하는 기능
@@ -27,6 +32,10 @@ class PostListActivity : AppCompatActivity() {
                     }
                     R.id.user -> {
                         val profilFragment = ProfilFragment()
+                        var bundle = Bundle()
+                        var uid = FirebaseAuth.getInstance().currentUser?.uid
+                        bundle.putString("destinationUid",uid)
+                        profilFragment.arguments = bundle
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, profilFragment).commit()
                     }
@@ -45,7 +54,15 @@ class PostListActivity : AppCompatActivity() {
             }
             selectedItemId = R.id.home
         }
-
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
+    }
+
+    fun setToolbarDefault(){
+        var toolbar_username : TextView = findViewById(R.id.toolbar_username)
+        var toolbar_btn_back : ImageView = findViewById(R.id.toolbar_btn_back)
+        var toolbar_title : TextView = findViewById(R.id.toolbar_title)
+        toolbar_username.visibility = View.GONE
+        toolbar_btn_back.visibility = View.GONE
+        toolbar_title.visibility = View.VISIBLE
     }
 }
