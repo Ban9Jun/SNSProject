@@ -126,6 +126,7 @@ class ProfilFragment : Fragment() {
                     account_btn_follow_signout?.text = "follow cancel"
                 }else{
                     account_btn_follow_signout?.text = "follow"
+                    if(uid == currentUserid) account_btn_follow_signout.text = "singout"
                 }
             }
         }
@@ -143,11 +144,11 @@ class ProfilFragment : Fragment() {
                 return@runTransaction
             }
             if(followDTO.followings.containsKey(uid)){
-                followDTO?.followingCount = followDTO?.followerCount!! - 1
-                followDTO?.followers?.remove(uid)
+                followDTO?.followingCount = followDTO?.followingCount!! - 1
+                followDTO?.followings?.remove(uid)
             }else{
                 followDTO?.followingCount = followDTO?.followingCount!! + 1
-                followDTO?.followers!![uid!!] = true
+                followDTO?.followings!![uid!!] = true
             }
             transaction.set(tsDocFollowing,followDTO)
             return@runTransaction
@@ -165,11 +166,11 @@ class ProfilFragment : Fragment() {
                 return@runTransaction
             }
             if(followDTO!!.followers.containsKey(currentUserid)){
-                followDTO?.followingCount = followDTO?.followerCount!! - 1
-                followDTO?.followers!!.remove(currentUserid!!)
+                followDTO!!.followerCount = followDTO!!.followerCount - 1
+                followDTO!!.followers.remove(currentUserid!!)
             }else{
-                followDTO?.followingCount = followDTO?.followingCount!! + 1
-                followDTO?.followers!![currentUserid!!] = true
+                followDTO!!.followerCount = followDTO!!.followerCount + 1
+                followDTO!!.followers[currentUserid!!] = true
             }
             transaction.set(tsDocFollower,followDTO!!)
             return@runTransaction

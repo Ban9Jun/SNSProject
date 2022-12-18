@@ -46,11 +46,6 @@ class PostListActivity : AppCompatActivity() {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.fl_container, profilFragment).commit()
                     }
-                    R.id.friend -> {
-                        val friendFragment = FriendFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, friendFragment).commit()
-                    }
                     R.id.post -> {
                         val postFragment = PostFragment()
                         supportFragmentManager.beginTransaction()
